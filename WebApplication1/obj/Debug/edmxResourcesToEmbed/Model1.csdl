@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MVCSiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_Faturalar">
+    <Key>
+      <PropertyRef Name="FaturaID" />
+    </Key>
+    <Property Name="FaturaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriID" Type="Int32" Nullable="false" />
+    <Property Name="KamyonID" Type="Int32" Nullable="false" />
+    <Property Name="SoforID" Type="Int32" Nullable="false" />
+    <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Miktar" Type="Int32" Nullable="false" />
+    <Property Name="FaturaSeriNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OdenmeDurumu" Type="Boolean" Nullable="false" />
+    <Property Name="DurumID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OdenmeDurumlari" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_OdenmeDurumlari" FromRole="tbl_Faturalar" ToRole="OdenmeDurumlari" />
+    <NavigationProperty Name="tbl_Kamyonlar" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Kamyonlar" FromRole="tbl_Faturalar" ToRole="tbl_Kamyonlar" />
+    <NavigationProperty Name="tbl_Musteri" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Musteri" FromRole="tbl_Faturalar" ToRole="tbl_Musteri" />
+    <NavigationProperty Name="tbl_Soforler" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Soforler" FromRole="tbl_Faturalar" ToRole="tbl_Soforler" />
+  </EntityType>
+  <EntityType Name="tbl_Kamyonlar">
+    <Key>
+      <PropertyRef Name="KamyonID" />
+    </Key>
+    <Property Name="KamyonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KamyonPlakaNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_NakliyeRapor" Relationship="Self.FK_tbl_NakliyeRapor_tbl_Kamyonlar" FromRole="tbl_Kamyonlar" ToRole="tbl_NakliyeRapor" />
+    <NavigationProperty Name="tbl_Faturalar" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Kamyonlar" FromRole="tbl_Kamyonlar" ToRole="tbl_Faturalar" />
+  </EntityType>
+  <EntityType Name="tbl_Kullancilar">
+    <Key>
+      <PropertyRef Name="KullanıcıID" />
+    </Key>
+    <Property Name="KullanıcıID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="KullaniciPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Musteri">
+    <Key>
+      <PropertyRef Name="MusteriID" />
+    </Key>
+    <Property Name="MusteriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MusteriVergiNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MusteriAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_NakliyeRapor" Relationship="Self.FK_tbl_NakliyeRapor_tbl_Musteri" FromRole="tbl_Musteri" ToRole="tbl_NakliyeRapor" />
+    <NavigationProperty Name="tbl_Faturalar" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Musteri" FromRole="tbl_Musteri" ToRole="tbl_Faturalar" />
+  </EntityType>
+  <EntityType Name="tbl_NakliyeRapor">
+    <Key>
+      <PropertyRef Name="RaporID" />
+    </Key>
+    <Property Name="RaporID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriID" Type="Int32" Nullable="false" />
+    <Property Name="KamyonID" Type="Int32" Nullable="false" />
+    <Property Name="SoforID" Type="Int32" Nullable="false" />
+    <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Miktar" Type="Int32" Nullable="false" />
+    <Property Name="GidilenYer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_Kamyonlar" Relationship="Self.FK_tbl_NakliyeRapor_tbl_Kamyonlar" FromRole="tbl_NakliyeRapor" ToRole="tbl_Kamyonlar" />
+    <NavigationProperty Name="tbl_Musteri" Relationship="Self.FK_tbl_NakliyeRapor_tbl_Musteri" FromRole="tbl_NakliyeRapor" ToRole="tbl_Musteri" />
+    <NavigationProperty Name="tbl_Soforler" Relationship="Self.FK_tbl_NakliyeRapor_tbl_Soforler" FromRole="tbl_NakliyeRapor" ToRole="tbl_Soforler" />
+  </EntityType>
+  <EntityType Name="tbl_Soforler">
+    <Key>
+      <PropertyRef Name="SoforID" />
+    </Key>
+    <Property Name="SoforID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SoforAdiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SoforTC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_NakliyeRapor" Relationship="Self.FK_tbl_NakliyeRapor_tbl_Soforler" FromRole="tbl_Soforler" ToRole="tbl_NakliyeRapor" />
+    <NavigationProperty Name="tbl_Faturalar" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Soforler" FromRole="tbl_Soforler" ToRole="tbl_Faturalar" />
+  </EntityType>
+  <Association Name="FK_tbl_NakliyeRapor_tbl_Kamyonlar">
+    <End Role="tbl_Kamyonlar" Type="Self.tbl_Kamyonlar" Multiplicity="1" />
+    <End Role="tbl_NakliyeRapor" Type="Self.tbl_NakliyeRapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Kamyonlar">
+        <PropertyRef Name="KamyonID" />
+      </Principal>
+      <Dependent Role="tbl_NakliyeRapor">
+        <PropertyRef Name="KamyonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_NakliyeRapor_tbl_Musteri">
+    <End Role="tbl_Musteri" Type="Self.tbl_Musteri" Multiplicity="1" />
+    <End Role="tbl_NakliyeRapor" Type="Self.tbl_NakliyeRapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Musteri">
+        <PropertyRef Name="MusteriID" />
+      </Principal>
+      <Dependent Role="tbl_NakliyeRapor">
+        <PropertyRef Name="MusteriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_NakliyeRapor_tbl_Soforler">
+    <End Role="tbl_Soforler" Type="Self.tbl_Soforler" Multiplicity="1" />
+    <End Role="tbl_NakliyeRapor" Type="Self.tbl_NakliyeRapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Soforler">
+        <PropertyRef Name="SoforID" />
+      </Principal>
+      <Dependent Role="tbl_NakliyeRapor">
+        <PropertyRef Name="SoforID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MVCSiteDBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="tbl_Faturalar" EntityType="Self.tbl_Faturalar" />
+    <EntitySet Name="tbl_Kamyonlar" EntityType="Self.tbl_Kamyonlar" />
+    <EntitySet Name="tbl_Kullancilar" EntityType="Self.tbl_Kullancilar" />
+    <EntitySet Name="tbl_Musteri" EntityType="Self.tbl_Musteri" />
+    <EntitySet Name="tbl_NakliyeRapor" EntityType="Self.tbl_NakliyeRapor" />
+    <EntitySet Name="tbl_Soforler" EntityType="Self.tbl_Soforler" />
+    <AssociationSet Name="FK_tbl_NakliyeRapor_tbl_Kamyonlar" Association="Self.FK_tbl_NakliyeRapor_tbl_Kamyonlar">
+      <End Role="tbl_Kamyonlar" EntitySet="tbl_Kamyonlar" />
+      <End Role="tbl_NakliyeRapor" EntitySet="tbl_NakliyeRapor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_NakliyeRapor_tbl_Musteri" Association="Self.FK_tbl_NakliyeRapor_tbl_Musteri">
+      <End Role="tbl_Musteri" EntitySet="tbl_Musteri" />
+      <End Role="tbl_NakliyeRapor" EntitySet="tbl_NakliyeRapor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_NakliyeRapor_tbl_Soforler" Association="Self.FK_tbl_NakliyeRapor_tbl_Soforler">
+      <End Role="tbl_Soforler" EntitySet="tbl_Soforler" />
+      <End Role="tbl_NakliyeRapor" EntitySet="tbl_NakliyeRapor" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MVCSiteDBModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MVCSiteDBModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="OdenmeDurumlari" EntityType="MVCSiteDBModel.OdenmeDurumlari" />
+    <AssociationSet Name="FK_tbl_Faturalar_OdenmeDurumlari" Association="MVCSiteDBModel.FK_tbl_Faturalar_OdenmeDurumlari">
+      <End Role="OdenmeDurumlari" EntitySet="OdenmeDurumlari" />
+      <End Role="tbl_Faturalar" EntitySet="tbl_Faturalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Faturalar_tbl_Kamyonlar" Association="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Kamyonlar">
+      <End Role="tbl_Kamyonlar" EntitySet="tbl_Kamyonlar" />
+      <End Role="tbl_Faturalar" EntitySet="tbl_Faturalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Faturalar_tbl_Musteri" Association="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Musteri">
+      <End Role="tbl_Musteri" EntitySet="tbl_Musteri" />
+      <End Role="tbl_Faturalar" EntitySet="tbl_Faturalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Faturalar_tbl_Soforler" Association="MVCSiteDBModel.FK_tbl_Faturalar_tbl_Soforler">
+      <End Role="tbl_Soforler" EntitySet="tbl_Soforler" />
+      <End Role="tbl_Faturalar" EntitySet="tbl_Faturalar" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="OdenmeDurumlari">
+    <Key>
+      <PropertyRef Name="DurumID" />
+    </Key>
+    <Property Name="DurumID" Type="Int32" Nullable="false" />
+    <Property Name="DurumAciklama" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Faturalar" Relationship="MVCSiteDBModel.FK_tbl_Faturalar_OdenmeDurumlari" FromRole="OdenmeDurumlari" ToRole="tbl_Faturalar" />
+  </EntityType>
+  <Association Name="FK_tbl_Faturalar_OdenmeDurumlari">
+    <End Type="MVCSiteDBModel.OdenmeDurumlari" Role="OdenmeDurumlari" Multiplicity="1" />
+    <End Type="MVCSiteDBModel.tbl_Faturalar" Role="tbl_Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OdenmeDurumlari">
+        <PropertyRef Name="DurumID" />
+      </Principal>
+      <Dependent Role="tbl_Faturalar">
+        <PropertyRef Name="DurumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Faturalar_tbl_Kamyonlar">
+    <End Type="MVCSiteDBModel.tbl_Kamyonlar" Role="tbl_Kamyonlar" Multiplicity="1" />
+    <End Type="MVCSiteDBModel.tbl_Faturalar" Role="tbl_Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Kamyonlar">
+        <PropertyRef Name="KamyonID" />
+      </Principal>
+      <Dependent Role="tbl_Faturalar">
+        <PropertyRef Name="KamyonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Faturalar_tbl_Musteri">
+    <End Type="MVCSiteDBModel.tbl_Musteri" Role="tbl_Musteri" Multiplicity="1" />
+    <End Type="MVCSiteDBModel.tbl_Faturalar" Role="tbl_Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Musteri">
+        <PropertyRef Name="MusteriID" />
+      </Principal>
+      <Dependent Role="tbl_Faturalar">
+        <PropertyRef Name="MusteriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Faturalar_tbl_Soforler">
+    <End Type="MVCSiteDBModel.tbl_Soforler" Role="tbl_Soforler" Multiplicity="1" />
+    <End Type="MVCSiteDBModel.tbl_Faturalar" Role="tbl_Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Soforler">
+        <PropertyRef Name="SoforID" />
+      </Principal>
+      <Dependent Role="tbl_Faturalar">
+        <PropertyRef Name="SoforID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

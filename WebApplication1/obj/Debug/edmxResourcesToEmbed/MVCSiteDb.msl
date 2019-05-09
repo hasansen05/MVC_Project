@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MVCSiteDBModelStoreContainer" CdmEntityContainer="MVCSiteDBEntities3">
+    <EntitySetMapping Name="OdenmeDurumlari">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.OdenmeDurumlari">
+        <MappingFragment StoreEntitySet="OdenmeDurumlari">
+          <ScalarProperty Name="DurumID" ColumnName="DurumID" />
+          <ScalarProperty Name="DurumAciklama" ColumnName="DurumAciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Faturalar">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.tbl_Faturalar">
+        <MappingFragment StoreEntitySet="tbl_Faturalar">
+          <ScalarProperty Name="FaturaID" ColumnName="FaturaID" />
+          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+          <ScalarProperty Name="KamyonID" ColumnName="KamyonID" />
+          <ScalarProperty Name="SoforID" ColumnName="SoforID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+          <ScalarProperty Name="FaturaSeriNo" ColumnName="FaturaSeriNo" />
+          <ScalarProperty Name="DurumID" ColumnName="DurumID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Kamyonlar">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.tbl_Kamyonlar">
+        <MappingFragment StoreEntitySet="tbl_Kamyonlar">
+          <ScalarProperty Name="KamyonID" ColumnName="KamyonID" />
+          <ScalarProperty Name="KamyonPlakaNo" ColumnName="KamyonPlakaNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Kullancilar">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.tbl_Kullancilar">
+        <MappingFragment StoreEntitySet="tbl_Kullancilar">
+          <ScalarProperty Name="KullanıcıID" ColumnName="KullanıcıID" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="KullaniciPassword" ColumnName="KullaniciPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Musteri">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.tbl_Musteri">
+        <MappingFragment StoreEntitySet="tbl_Musteri">
+          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+          <ScalarProperty Name="MusteriAdi" ColumnName="MusteriAdi" />
+          <ScalarProperty Name="MusteriVergiNo" ColumnName="MusteriVergiNo" />
+          <ScalarProperty Name="MusteriAdres" ColumnName="MusteriAdres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_NakliyeRapor">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.tbl_NakliyeRapor">
+        <MappingFragment StoreEntitySet="tbl_NakliyeRapor">
+          <ScalarProperty Name="RaporID" ColumnName="RaporID" />
+          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+          <ScalarProperty Name="KamyonID" ColumnName="KamyonID" />
+          <ScalarProperty Name="SoforID" ColumnName="SoforID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+          <ScalarProperty Name="GidilenYer" ColumnName="GidilenYer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Soforler">
+      <EntityTypeMapping TypeName="MVCSiteDBModel.tbl_Soforler">
+        <MappingFragment StoreEntitySet="tbl_Soforler">
+          <ScalarProperty Name="SoforID" ColumnName="SoforID" />
+          <ScalarProperty Name="SoforAdiSoyadi" ColumnName="SoforAdiSoyadi" />
+          <ScalarProperty Name="SoforTC" ColumnName="SoforTC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MVCSiteDBModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MVCSiteDBModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MVCSiteDBModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MVCSiteDBModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MVCSiteDBModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MVCSiteDBModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MVCSiteDBModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MVCSiteDBModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MVCSiteDBModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

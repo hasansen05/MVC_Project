@@ -1,0 +1,107 @@
+﻿{
+    ViewBag.Title = "DatalariGetir1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using WebApplication1.Models.ViewModels
+@model FaturaShowVM
+
+<style>
+    #Baslik {
+        top: 80px;
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    #DuzenleButon {
+        top: 10px;
+        left: 600px;
+    }
+
+    #faturatablo {
+        position: relative;
+        top: 20px;
+    }
+</style>
+<h2 id="Baslik">Faturalar</h2>
+<div>
+    <div class="input-group" id="button">
+        <input type="submit" class="btn btn-success btn-lg" value="Bilgi Düzenle" />
+    </div>
+    <div class="table" id="search">
+
+        <div class="col-xs-6 col-md-12">
+
+            <div class="table-responsive table--no-card m-b-40">
+                <table class="table table-bordered table-striped table-earning" id="faturatablo">
+
+
+
+                    <thead>
+                        <tr>
+                            <th>FaturaID</th>
+                            <th>SoforAdiSoyadi</th>
+                            <th>MusteriAdi</th>
+                            <th>Tarih</th>
+                            <th>Nakliye Ücreti</th>
+                            <th>KamyonPlaka</th>
+                            <th>Odenme Durumu</th>
+                            <th>FaturaSeriNo</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="~/DataTablesContents/datatables.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+<script src="~/DataTablesContents/datatables.min.js"></script>
+@*<script src="~/HomeContents/js/vendor/jquery-1.12.4.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+        //$('#faturatablo').on( 'click', 'tr', function () {
+        //    $(this).toggleClass('selected');
+        
+      var table= $("#faturatablo").DataTable({
+            select: true,
+            "ajax": {
+                "url": "/ShowFatura/DatalariGetir",
+                "type": "GET",
+                "datatype": "json",
+
+            },
+
+            "columns": [
+                { "data": "FaturaID" },
+                { "data": "SoforAdiSoyadi" },
+                { "data": "MusteriAdi" },
+                { "data": "Tarih" },
+                { "data": "Miktar" },
+                { "data": "KamyonPlakaNo" },
+                { "data": "DurumAciklama" },
+                { "data": "FaturaSeriNo" }
+            ]
+
+        });
+        $('#faturatablo').on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+        });
+
+        $('#button').click(function () {
+            var FaturaID = $.map(table.rows('selected').data(), function (item) {
+                var FaturaID = table.rows(0).data();
+               
+                
+            });
+            alert('Bilgi' + rows[0].item);
+        });
+
+    });
+
+
+
+</script>
